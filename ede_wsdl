@@ -1,0 +1,462 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- Published by JAX-WS RI at http://jax-ws.dev.java.net. RI's version is JAX-WS RI 2.2-hudson-752-. -->
+<wsdl:definitions xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/" xmlns:wsc="http://ede.de/webservices/ws_ext_elc" xmlns:soapenc="http://www.w3.org/2003/05/soap-encoding" xmlns:wsrm1="http://schemas.microsoft.com/ws-rx/wsrmp/200702" xmlns:wsp="http://www.w3.org/ns/ws-policy" xmlns:sp="http://docs.oasis-open.org/ws-sx/ws-securitypolicy/200702" xmlns:wsrm="http://docs.oasis-open.org/ws-rx/wsrmp/200702" xmlns:wspp="http://java.sun.com/xml/ns/wsit/policy" xmlns:xs="http://www.w3.org/2001/XMLSchema" xmlns:sc="http://schemas.sun.com/2006/03/wss/server" xmlns:wsdlsoap12="http://schemas.xmlsoap.org/wsdl/soap12/" xmlns:wsam="http://www.w3.org/2007/05/addressing/metadata" targetNamespace="http://ede.de/webservices/ws_ext_elc">
+  <wsdl:types>
+    <xs:schema elementFormDefault="qualified" targetNamespace="http://ede.de/webservices/ws_ext_elc">
+
+	<xs:element name="SimulateOrderRequest" type="SimulateOrderRequestType"/>
+	<xs:element name="CreateOrderRequest" type="CreateOrderRequestType"/>
+	<xs:element name="QueryOrderRequest" type="QueryOrderRequestType"/>
+	<xs:element name="DeviatingDeliveryAddress" type="DeviatingDeliveryAddressType"/>
+	<xs:element name="GetOrderStatusRequest" type="GetOrderStatusRequest"/><xs:element name="Response" type="ResponseType"/>
+
+	<!-- SimulateOrder -->
+	<xs:complexType name="SimulateOrderRequestType">
+		
+	<xs:complexContent>
+			<xs:extension base="RequestType">
+				<xs:sequence>
+					<xs:element maxOccurs="1" minOccurs="1" name="Payload" type="SalesOrderSimulateRequestType"/>
+				</xs:sequence>
+			<xs:attribute name="language" type="xs:string"/><xs:attribute name="requestId" type="xs:string"/><xs:attribute name="version"><xs:simpleType><xs:restriction base="xs:string"/></xs:simpleType></xs:attribute><xs:attribute name="action"><xs:simpleType><xs:restriction base="xs:string"><xs:enumeration value="ELC"/><xs:enumeration value="ZEDEV"/></xs:restriction></xs:simpleType></xs:attribute></xs:extension>
+		</xs:complexContent></xs:complexType>
+
+
+	<!-- CreateOrder -->
+	<xs:complexType name="QueryOrderRequestType">
+		
+	<xs:complexContent>
+			<xs:extension base="RequestType">
+				<xs:sequence>
+					<xs:element maxOccurs="1" minOccurs="1" name="Payload" type="xs:anyType"/>
+				</xs:sequence>
+			<xs:attribute name="language" type="xs:string"/><xs:attribute name="requestId" type="xs:string"/><xs:attribute name="version"><xs:simpleType><xs:restriction base="xs:string"/></xs:simpleType></xs:attribute><xs:attribute name="action"><xs:simpleType><xs:restriction base="xs:string"><xs:enumeration value="ELC"/><xs:enumeration value="ZEDEV"/></xs:restriction></xs:simpleType></xs:attribute></xs:extension>
+		</xs:complexContent></xs:complexType><xs:complexType name="CreateOrderRequestType">
+		
+	<xs:complexContent>
+			<xs:extension base="RequestType">
+				<xs:sequence>
+					<xs:element maxOccurs="1" minOccurs="1" name="Payload" type="SalesOrderCreateRequestType"/>
+				</xs:sequence>
+			<xs:attribute name="language"><xs:simpleType><xs:restriction base="xs:string"/></xs:simpleType></xs:attribute><xs:attribute name="requestId" type="xs:string"/><xs:attribute name="version"><xs:simpleType><xs:restriction base="xs:string"/></xs:simpleType></xs:attribute><xs:attribute name="action"><xs:simpleType><xs:restriction base="xs:string"><xs:enumeration value="ELC"/><xs:enumeration value="ZEDEV"/></xs:restriction></xs:simpleType></xs:attribute></xs:extension>
+		</xs:complexContent></xs:complexType>
+
+
+	<!-- QueryOrder -->
+	
+	
+	
+	<xs:complexType name="DeviatingDeliveryAddressType">
+		
+	<xs:complexContent>
+			<xs:extension base="RequestType">
+				<xs:sequence>
+					<xs:element maxOccurs="1" minOccurs="1" name="Payload" type="xs:anyType"/>
+				</xs:sequence>
+			<xs:attribute name="language"><xs:simpleType><xs:restriction base="xs:string"/></xs:simpleType></xs:attribute><xs:attribute name="requestId" type="xs:string"/><xs:attribute name="version" type="xs:string"/><xs:attribute name="action"><xs:simpleType><xs:restriction base="xs:string"><xs:enumeration value="ELC"/><xs:enumeration value="ZEDEV"/></xs:restriction></xs:simpleType></xs:attribute></xs:extension>
+		</xs:complexContent></xs:complexType>
+
+
+	<!-- RequestType -->
+	<xs:complexType name="GetOrderStatusRequest"><xs:complexContent><xs:extension base="RequestType"><xs:sequence><xs:element name="Payload" type="GetOrderStatusRequestType"/></xs:sequence><xs:attribute name="language" type="xs:string"/><xs:attribute name="requestId" type="xs:string"/><xs:attribute name="version" type="xs:string"/><xs:attribute name="action"><xs:simpleType><xs:restriction base="xs:string"><xs:enumeration value="ELC"/><xs:enumeration value="ZEDEV"/></xs:restriction></xs:simpleType></xs:attribute></xs:extension></xs:complexContent></xs:complexType><xs:complexType name="RequestType">
+
+		<xs:annotation>
+			<xs:documentation>
+				Request to EDE WebService
+			</xs:documentation>
+		</xs:annotation>
+
+		<xs:sequence>
+			<xs:element maxOccurs="1" minOccurs="1" name="Credentials" type="CredentialsType"/>
+		</xs:sequence>
+
+		
+		
+		
+		
+
+	</xs:complexType>
+
+
+	<!-- ResponseType -->
+	<xs:complexType name="ResponseType">
+
+		<xs:annotation>
+			<xs:documentation>
+				Response from EDE WebService
+			</xs:documentation>
+		</xs:annotation>
+
+		<xs:sequence>
+			<xs:element maxOccurs="1" minOccurs="1" name="created" type="xs:dateTime"/>
+			<xs:element maxOccurs="1" minOccurs="1" name="StatusInformation" type="xs:string"/>
+			<xs:element maxOccurs="1" minOccurs="1" name="StatusCode" type="xs:int"/>
+
+			<xs:any maxOccurs="1" minOccurs="0" processContents="skip"/>
+			<!-- 
+			<xs:element name="Payload" type="xs:anyType" minOccurs="0" maxOccurs="1" />
+ 			-->
+		</xs:sequence>
+
+		<xs:attribute name="language" type="xs:string" use="required"/>
+		<xs:attribute name="requestId" type="xs:string" use="required"/>
+		<xs:attribute name="version" type="xs:string" use="required"/>
+	<xs:attribute name="action"><xs:simpleType><xs:restriction base="xs:string"><xs:enumeration value="ELC"/><xs:enumeration value="ZEDEV"/></xs:restriction></xs:simpleType></xs:attribute></xs:complexType>
+
+
+	<!-- CredentialsType -->
+	<xs:complexType name="CredentialsType">
+
+		<xs:annotation>
+			<xs:documentation>User information that have been provided after
+				registration
+			</xs:documentation>
+		</xs:annotation>
+
+		<xs:sequence>
+			<xs:element maxOccurs="1" minOccurs="1" name="MemberId" type="xs:string"/>
+			<xs:element maxOccurs="1" minOccurs="1" name="Login" type="xs:string"/>
+			<xs:element maxOccurs="1" minOccurs="1" name="Password" type="xs:string"/>
+			
+			
+			
+		</xs:sequence>
+		
+	</xs:complexType>
+
+	<xs:complexType name="SalesOrderSimulateRequestType">
+		<xs:sequence>
+			<xs:element name="ShipmentTypeCode" type="xs:string">
+				<xs:annotation>
+					<xs:documentation xml:lang="DE">Versandbedingung</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="Items"><xs:complexType><xs:sequence><xs:element maxOccurs="200" minOccurs="1" name="Item" type="SalesOrderSimulateRequestItemType"/></xs:sequence></xs:complexType></xs:element>
+		</xs:sequence>
+	</xs:complexType>
+
+	<xs:complexType name="SalesOrderSimulateRequestItemType">
+		<xs:sequence>
+			<xs:element name="ID" type="xs:integer">
+				<xs:annotation>
+					<xs:documentation xml:lang="DE">Positionsnummer</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="ProductID" type="xs:string">
+				<xs:annotation>
+					<xs:documentation xml:lang="DE">Artikelnummer</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="Quantity">
+				<xs:annotation>
+					<xs:documentation xml:lang="DE">
+						Menge
+					</xs:documentation>
+				</xs:annotation>
+				<xs:simpleType>
+					<xs:restriction base="xs:integer">
+						<xs:minInclusive value="1"/>
+						<xs:maxInclusive value="9999999"/>
+					</xs:restriction>
+				</xs:simpleType>
+			</xs:element>
+			<xs:element name="Date" type="xs:date">
+				<xs:annotation>
+					<xs:documentation xml:lang="DE">Datum</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+		</xs:sequence>
+	</xs:complexType>
+	
+	
+	<xs:complexType name="SalesOrderCreateRequestType">
+		<xs:sequence>
+			<xs:element minOccurs="0" name="OrderMemberID" type="xs:string">
+				
+			</xs:element><xs:element minOccurs="0" name="OrderMemberCustomerID" type="xs:string">
+				
+			</xs:element>
+			
+			
+			
+			<xs:element name="Department" type="xs:string"/><xs:element minOccurs="0" name="Remark" type="xs:string"/>
+			
+			
+			
+			<xs:element name="CommissionID" type="xs:string"/><xs:element name="ShipmentTypeCode" type="xs:string">
+				
+			</xs:element>
+			
+			
+			
+			<xs:element minOccurs="0" name="DeliveryComplete" type="xs:string">
+				
+			</xs:element><xs:element minOccurs="0" name="DesiredShipmentDate" type="xs:date">
+				
+			</xs:element><xs:element id="Reci" name="Recipient" type="SalesOrderRecipient">
+				
+			</xs:element><xs:element name="Items"><xs:complexType><xs:sequence><xs:element maxOccurs="200" minOccurs="1" name="Item" type="SalesOrderCreateRequestItem">
+				
+			</xs:element></xs:sequence></xs:complexType></xs:element>
+			
+		</xs:sequence>
+	</xs:complexType>
+	
+	<xs:complexType name="SalesOrderRecipient">
+		<xs:sequence>
+			
+			
+			
+			<xs:element maxOccurs="2" minOccurs="0" name="Address" type="SalesOrderRecipientAddress">
+				
+			</xs:element>
+		</xs:sequence>
+	</xs:complexType>
+	
+	<xs:complexType name="SalesOrderRecipientAddress">
+		<xs:sequence>
+			<xs:element maxOccurs="1" minOccurs="0" name="AddressID" type="xs:string">
+				<xs:annotation>
+					<xs:documentation xml:lang="DE">abw. ZKWE
+						Warenempfänger</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			
+			<xs:element maxOccurs="1" minOccurs="0" name="Title" type="xs:string">
+				<xs:annotation>
+					<xs:documentation xml:lang="DE">Anrede</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			
+			<xs:element maxOccurs="1" minOccurs="0" name="Name1">
+				<xs:annotation>
+					<xs:documentation xml:lang="DE">
+						Name 1
+					</xs:documentation>
+				</xs:annotation>
+				<xs:simpleType>
+					<xs:restriction base="xs:string">
+						<xs:minLength value="1"/>
+						<xs:whiteSpace value="collapse"/>
+					</xs:restriction>
+				</xs:simpleType>
+			</xs:element>
+
+			<xs:element maxOccurs="1" minOccurs="0" name="Name2" type="xs:string">
+				<xs:annotation>
+					<xs:documentation xml:lang="DE">Name 2</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			
+			<xs:element maxOccurs="1" minOccurs="0" name="Street" type="xs:string">
+				<xs:annotation>
+					<xs:documentation xml:lang="DE">
+						Strasse
+					</xs:documentation>
+				</xs:annotation>
+				
+			</xs:element>
+
+			<xs:element maxOccurs="1" minOccurs="0" name="ZipCode">
+				<xs:annotation>
+					<xs:documentation xml:lang="DE">
+						Postleitzahl
+					</xs:documentation>
+				</xs:annotation>
+				<xs:simpleType>
+					<xs:restriction base="xs:string">
+						<xs:minLength value="1"/>
+						<xs:whiteSpace value="collapse"/>
+					</xs:restriction>
+				</xs:simpleType>
+			</xs:element>
+
+			<xs:element maxOccurs="1" minOccurs="0" name="City">
+				<xs:annotation>
+					<xs:documentation xml:lang="DE">
+						Ort
+					</xs:documentation>
+				</xs:annotation>
+				<xs:simpleType>
+					<xs:restriction base="xs:string">
+						<xs:minLength value="1"/>
+						<xs:whiteSpace value="collapse"/>
+					</xs:restriction>
+				</xs:simpleType>
+			</xs:element>
+
+			<xs:element maxOccurs="1" minOccurs="0" name="CountryCode">
+				<xs:annotation>
+					<xs:documentation xml:lang="DE">
+						Länderschlüssel (ISO)
+					</xs:documentation>
+				</xs:annotation>
+				<xs:simpleType>
+					<xs:restriction base="xs:string">
+						<xs:minLength value="1"/>
+						<xs:whiteSpace value="collapse"/>
+					</xs:restriction>
+				</xs:simpleType>
+			</xs:element>
+
+
+		</xs:sequence>
+	<xs:attribute id="id" name="type" use="required"><xs:simpleType><xs:restriction base="xs:string"><xs:enumeration value="WE"/><xs:enumeration value="EK"/><xs:enumeration value="MK"/></xs:restriction></xs:simpleType></xs:attribute></xs:complexType>
+	
+	<xs:complexType name="SalesOrderCreateRequestItem">
+
+		<xs:sequence>
+			<xs:element name="ID" type="xs:string">
+				<xs:annotation>
+					<xs:documentation xml:lang="DE">Positionsnummer</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			
+			<xs:element name="ProductID" type="xs:string">
+				<xs:annotation>
+					<xs:documentation xml:lang="DE">Artikelnummer</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			
+			<xs:element name="Quantity">
+				<xs:annotation>
+					<xs:documentation xml:lang="DE">
+						Menge
+					</xs:documentation>
+				</xs:annotation>
+				<xs:simpleType>
+					<xs:restriction base="xs:integer">
+						<xs:minInclusive value="1"/>
+						<xs:maxExclusive value="9999999"/>
+					</xs:restriction>
+				</xs:simpleType>
+			</xs:element>
+
+			<xs:element minOccurs="0" name="CommissionID" type="xs:string">
+				<xs:annotation>
+					<xs:documentation xml:lang="DE">Kommissionsnummer</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			
+			<xs:element minOccurs="0" name="ProductMemberCustomerID" type="xs:string">
+				<xs:annotation>
+					<xs:documentation xml:lang="DE">Artikelnr des Kunden</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			
+			<xs:element minOccurs="0" name="ProductMemberID" type="xs:string">
+				<xs:annotation>
+					<xs:documentation xml:lang="DE">Artikelnr des
+						Mitglieds</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+
+		<xs:element minOccurs="0" name="Remark" type="xs:string"/><xs:element minOccurs="0" name="DesiredShipmentDatePos" type="xs:string"/></xs:sequence>
+	</xs:complexType>
+
+<xs:complexType name="GetOrderStatusRequestType"><xs:sequence><xs:element name="Item" type="xs:string"/><xs:element name="Itemlist" type="xs:string"/><xs:element name="GetTrackingDetails" type="xs:string"/></xs:sequence></xs:complexType>
+    <xs:element name="getBackOrderList" type="xs:anyType"/><xs:element name="getBackOrderListResponse" type="xs:anyType"/></xs:schema>
+  </wsdl:types>
+  <wsdl:message name="getDeviatingDeliveryAddresses">
+    <wsdl:part name="parameter5" element="DeviatingDeliveryAddress">
+    </wsdl:part>
+  </wsdl:message>
+  <wsdl:message name="getOrderStatus">
+    <wsdl:part name="parameter7" element="GetOrderStatusRequest">
+    </wsdl:part>
+  </wsdl:message>
+  <wsdl:message name="createOrder">
+    <wsdl:part name="parameter3" element="CreateOrderRequest">
+    </wsdl:part>
+  </wsdl:message>
+  <wsdl:message name="simulateOrderResponse">
+    <wsdl:part name="parameter2" element="Response">
+    </wsdl:part>
+  </wsdl:message>
+  <wsdl:message name="getDeviatingDeliveryAddressesResponse">
+    <wsdl:part name="parameter6" element="Response">
+    </wsdl:part>
+  </wsdl:message>
+  <wsdl:message name="createOrderResponse">
+    <wsdl:part name="parameter4" element="Response">
+    </wsdl:part>
+  </wsdl:message>
+  <wsdl:message name="simulateOrder">
+    <wsdl:part name="parameter1" element="SimulateOrderRequest">
+    </wsdl:part>
+  </wsdl:message>
+  <wsdl:message name="getOrderStatusResponse">
+    <wsdl:part name="parameter8" element="Response">
+    </wsdl:part>
+  </wsdl:message>
+  <wsdl:portType name="WS_EXT_ELCPortType">
+    <wsdl:operation name="simulateOrder">
+      <wsdl:input name="simulateOrder" message="wsc:simulateOrder">
+    </wsdl:input>
+      <wsdl:output name="simulateOrderResponse" message="wsc:simulateOrderResponse">
+    </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="createOrder">
+      <wsdl:input name="createOrder" message="wsc:createOrder">
+    </wsdl:input>
+      <wsdl:output name="createOrderResponse" message="wsc:createOrderResponse">
+    </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="getDeviatingDeliveryAddresses">
+      <wsdl:input name="getDeviatingDeliveryAddresses" message="wsc:getDeviatingDeliveryAddresses">
+    </wsdl:input>
+      <wsdl:output name="getDeviatingDeliveryAddressesResponse" message="wsc:getDeviatingDeliveryAddressesResponse">
+    </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="getOrderStatus">
+      <wsdl:input name="getOrderStatus" message="wsc:getOrderStatus">
+    </wsdl:input>
+      <wsdl:output name="getOrderStatusResponse" message="wsc:getOrderStatusResponse">
+    </wsdl:output>
+    </wsdl:operation>
+  </wsdl:portType>
+  <wsdl:binding name="WS_EXT_ELCBinding" type="wsc:WS_EXT_ELCPortType">
+    <wsdlsoap12:binding style="document" transport="http://schemas.xmlsoap.org/soap/http"/>
+    <wsdl:operation name="simulateOrder">
+      <wsdlsoap12:operation soapAction="simulateOrder"/>
+      <wsdl:input name="simulateOrder">
+        <wsdlsoap12:body parts="parameter1" use="literal"/>
+      </wsdl:input>
+      <wsdl:output name="simulateOrderResponse">
+        <wsdlsoap12:body parts="parameter2" use="literal"/>
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="createOrder">
+      <wsdlsoap12:operation soapAction="createOrder"/>
+      <wsdl:input name="createOrder">
+        <wsdlsoap12:body parts="parameter3" use="literal"/>
+      </wsdl:input>
+      <wsdl:output name="createOrderResponse">
+        <wsdlsoap12:body parts="parameter4" use="literal"/>
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="getDeviatingDeliveryAddresses">
+      <wsdlsoap12:operation soapAction="getDeviatingDeliveryAddresses"/>
+      <wsdl:input name="getDeviatingDeliveryAddresses">
+        <wsdlsoap12:body parts="parameter5" use="literal"/>
+      </wsdl:input>
+      <wsdl:output name="getDeviatingDeliveryAddressesResponse">
+        <wsdlsoap12:body parts="parameter6" use="literal"/>
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="getOrderStatus">
+      <wsdlsoap12:operation soapAction="getOrderStatus"/>
+      <wsdl:input name="getOrderStatus">
+        <wsdlsoap12:body parts="parameter7" use="literal"/>
+      </wsdl:input>
+      <wsdl:output name="getOrderStatusResponse">
+        <wsdlsoap12:body parts="parameter8" use="literal"/>
+      </wsdl:output>
+    </wsdl:operation>
+  </wsdl:binding>
+  <wsdl:service name="WS_EXT_ELC">
+    <wsdl:port name="WS_EXT_ELCPort" binding="wsc:WS_EXT_ELCBinding">
+      <wsdlsoap12:address location="https://webservices.ede.de:9443/ibis/ws/WS_EXT_ELC"/>
+    </wsdl:port>
+  </wsdl:service>
+</wsdl:definitions>
